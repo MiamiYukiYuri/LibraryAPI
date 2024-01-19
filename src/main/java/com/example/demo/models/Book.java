@@ -4,6 +4,7 @@ package com.example.demo.models;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 
@@ -17,9 +18,11 @@ public class Book {
 
     private String author;
 
-    private String pageCount;
+    private String pageAmount;
 
     @CreatedDate
+    private Date added;
+
     private Date borrowed;
     private Date returned;
 
@@ -41,8 +44,8 @@ public class Book {
         return author;
     }
 
-    public String getPageCount() {
-        return pageCount;
+    public String getPageAmount() {
+        return pageAmount;
     }
 
     public Date getBorrowed() {
@@ -51,5 +54,9 @@ public class Book {
 
     public Date getReturned() {
         return returned;
+    }
+
+    public Date getAdded() {
+        return added;
     }
 }
