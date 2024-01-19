@@ -20,7 +20,7 @@ public class BookController {
         return bookService.createBook(book);
     }
 
-    // GET all books
+    // GET ALL books
     @GetMapping("/book")
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
@@ -33,4 +33,15 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
+    // PUT update a book
+    @PutMapping("/book")
+    public Book updateBook(@RequestBody Book book) {
+        return bookService.updateBook(book);
+    }
+
+    // DELETE a book
+    @DeleteMapping("/book/{id}")
+    public void deleteBook(@PathVariable String id) {
+        bookService.deleteBook(id);
+    }
 }

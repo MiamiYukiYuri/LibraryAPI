@@ -26,4 +26,15 @@ public class BookService {
     public Book getBookById(String id) {
         return bookRepository.findById(id).get();
     }
+
+    // PUT update a book
+    public Book updateBook(Book book) {
+        return bookRepository.save(book);
+    }
+
+    // DELETE a book
+    public void deleteBook(String id) {
+        bookRepository.deleteById(id);
+    }
+
 }
