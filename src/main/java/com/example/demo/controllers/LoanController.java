@@ -32,11 +32,24 @@ public class LoanController {
         return loanService.getLoanById(id);
     }
 
-    // GET loan by user id ?
-    // GET loan by book id ?
+/*
+    // GET loan by user id ???
+    @GetMapping("/loan/user/{id}")
+    public Loan getLoanByUserId(@PathVariable String id) {
+        return loanService.getLoanByUserId(id);
+    }
+
+
+    // GET loan by book id ????
+    @GetMapping("loan/user/{id}")
+    public Loan getLoanByBookId(@PathVariable String id) {
+        return loanService.getLoanByBookId(id);
+    }
+   */
+
 
     // PUT - update loan info
-    @PutMapping("/loan")
+    @PutMapping("/loan/{id}")
     public Loan updateLoan(@RequestBody Loan loan) {
         return loanService.updateLoan(loan);
     }

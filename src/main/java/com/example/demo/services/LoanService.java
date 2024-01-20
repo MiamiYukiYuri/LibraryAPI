@@ -27,6 +27,20 @@ public class LoanService {
             return loanRepository.findById(id).get();
         }
 
+/*
+        // GET loan by user id ???
+        public Loan getLoanByUserId(String id) {
+            return loanRepository.findById(id).get();
+        }
+
+
+        // GET loan by book id ???
+        public Loan getLoanByBookId(String id) {
+            return loanRepository.findById(id).get();
+        }
+
+         */
+
         // PUT - update loan info, ex. return date
         public Loan updateLoan(Loan loan) {
             return loanRepository.save(loan);

@@ -18,7 +18,7 @@ import java.util.Date;
 
         @CreatedDate
         private Date borrowed;
-        private Date returned;
+        private Date returnDate;
 
         // CONSTRUCTOR
         public Loan() {
@@ -41,7 +41,7 @@ import java.util.Date;
             return borrowed;
         }
 
-        public Date getReturned() {
-            return returned;
+        public Date getReturnDate() {
+            return returnDate;
         }
     }

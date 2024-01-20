@@ -13,11 +13,11 @@ public class Book {
     private String id;
     private String title;
     private String author;
+    private String description;
     private String pageAmount;
-    private boolean available; // true, false ???
+    private String available; // ???
     @CreatedDate
     private Date added;
-
 
 
     // Tom konstruktor för att inte Postman ska balla ur
@@ -38,6 +38,10 @@ public class Book {
         return author;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public String getPageAmount() {
         return pageAmount;
     }
@@ -46,7 +50,7 @@ public class Book {
         return added;
     }
 
-    public boolean isAvailable() {
+    public String getAvailable() {
         return available;
     }
 

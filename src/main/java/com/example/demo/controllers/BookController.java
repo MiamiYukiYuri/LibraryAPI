@@ -33,7 +33,7 @@ public class BookController {
     }
 
     // PUT - update book info
-    @PutMapping("/book")
+    @PutMapping("/book/{id}")
     public Book updateBook(@RequestBody Book book) {
         return bookService.updateBook(book);
     }
