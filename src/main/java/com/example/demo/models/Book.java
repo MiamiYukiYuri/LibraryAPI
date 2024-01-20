@@ -1,6 +1,5 @@
 package com.example.demo.models;
 
-
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -15,7 +14,7 @@ public class Book {
     private String title;
     private String author;
     private String pageAmount;
-    private boolean available; // true, false
+    private boolean available; // true, false ???
     @CreatedDate
     private Date added;
 

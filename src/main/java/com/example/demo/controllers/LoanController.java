@@ -32,6 +32,9 @@ public class LoanController {
         return loanService.getLoanById(id);
     }
 
+    // GET loan by user id ?
+    // GET loan by book id ?
+
     // PUT - update loan info
     @PutMapping("/loan")
     public Loan updateLoan(@RequestBody Loan loan) {

@@ -20,5 +20,28 @@ import java.util.Date;
         private Date borrowed;
         private Date returned;
 
+        // CONSTRUCTOR
+        public Loan() {
+        }
 
-}
+        // GETTERS
+        public String getId() {
+            return id;
+        }
+
+        public String getBookId() {
+            return bookId;
+        }
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public Date getBorrowed() {
+            return borrowed;
+        }
+
+        public Date getReturned() {
+            return returned;
+        }
+    }

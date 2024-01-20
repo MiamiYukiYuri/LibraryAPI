@@ -3,13 +3,15 @@ package com.example.demo.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document(collection = "users")
 
 public class User {
     @Id
     private String id;
     private String fullName;
-    private String borrowedBooks;
+    private List borrowedBooks;
 
 
     // Tom konstruktor för att inte Postman ska balla ur
@@ -26,7 +28,8 @@ public class User {
         return fullName;
     }
 
-    public String getBorrowedBooks() {
+    public List getBorrowedBooks() {
         return borrowedBooks;
     }
+
 }
