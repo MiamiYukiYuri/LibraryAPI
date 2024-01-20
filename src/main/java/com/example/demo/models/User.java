@@ -1,6 +1,5 @@
 package com.example.demo.models;
 
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,9 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
     @Id
     private String id;
-
     private String fullName;
-
     private String borrowedBooks;
 
 
@@ -20,5 +17,16 @@ public class User {
     }
 
 
+    // GETTERS
+    public String getId() {
+        return id;
+    }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getBorrowedBooks() {
+        return borrowedBooks;
+    }
 }

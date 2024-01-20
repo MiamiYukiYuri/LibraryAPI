@@ -23,12 +23,12 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    // GET user by id
+    // GET specific user by id
     public User getUserById(String id) {
         return userRepository.findById(id).get();
     }
 
-    // PUT update a user
+    // PUT update user info
     public User updateUser(User user) {
         return userRepository.save(user);
     }

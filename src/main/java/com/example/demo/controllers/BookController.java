@@ -4,7 +4,6 @@ import com.example.demo.services.BookService;
 import com.example.demo.models.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -14,7 +13,7 @@ public class BookController {
     @Autowired
     BookService bookService;
 
-    // POST   http://localhost:8080/api/book
+    // POST - ADD book  http://localhost:8080/api/book
     @PostMapping("/book")
     public Book createBook(@RequestBody Book book) {
         return bookService.createBook(book);
@@ -33,13 +32,13 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
-    // PUT update a book
+    // PUT - update book info
     @PutMapping("/book")
     public Book updateBook(@RequestBody Book book) {
         return bookService.updateBook(book);
     }
 
-    // DELETE a book
+    // DELETE book
     @DeleteMapping("/book/{id}")
     public void deleteBook(@PathVariable String id) {
         bookService.deleteBook(id);

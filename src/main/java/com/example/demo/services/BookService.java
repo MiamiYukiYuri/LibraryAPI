@@ -27,12 +27,12 @@ public class BookService {
         return bookRepository.findById(id).get();
     }
 
-    // PUT update a book
+    // PUT update book info
     public Book updateBook(Book book) {
         return bookRepository.save(book);
     }
 
-    // DELETE a book
+    // DELETE book
     public void deleteBook(String id) {
         bookRepository.deleteById(id);
     }
