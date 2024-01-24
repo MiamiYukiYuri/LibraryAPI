@@ -27,36 +27,37 @@ public class LoanController {
 
     // GET loan by id
     // {id} = path parameter
-    @GetMapping("/loan/{id}")
-    public Loan getLoanById(@PathVariable String id) {
-        return loanService.getLoanById(id);
-    }
-
-/*
-    // GET loan by user id ???
-    @GetMapping("/loan/user/{id}")
-    public Loan getLoanByUserId(@PathVariable String id) {
-        return loanService.getLoanByUserId(id);
+    @GetMapping("/loan/{loanId}")
+    public Loan getLoanById(@PathVariable String loanId) {
+        return loanService.getLoanById(loanId);
     }
 
 
-    // GET loan by book id ????
-    @GetMapping("loan/user/{id}")
-    public Loan getLoanByBookId(@PathVariable String id) {
-        return loanService.getLoanByBookId(id);
+    // GET loan by user id
+    // Hämtar listan med lån för specifikt user id
+    @GetMapping("/loan/user/{userId}")
+    public List<Loan> getLoanByUserId(@PathVariable String userId) {
+        return loanService.getLoanByUserId(userId);
     }
-   */
+
+
+    // GET loan by book bookId
+    @GetMapping("loan/book/{bookId}")
+    public Loan getLoanByBookId(@PathVariable String bookId) {
+        return loanService.getLoanByBookId(bookId);
+    }
+
 
 
     // PUT - update loan info
-    @PutMapping("/loan/{id}")
+    @PutMapping("/loan")
     public Loan updateLoan(@RequestBody Loan loan) {
         return loanService.updateLoan(loan);
     }
 
     // DELETE loan
-    @DeleteMapping("/loan/{id}")
-    public void deleteLoan(@PathVariable String id) {
-        loanService.deleteLoan(id);
+    @DeleteMapping("/loan/{loanId}")
+    public void deleteLoan(@PathVariable String loanId) {
+        loanService.deleteLoan(loanId);
     }
 }

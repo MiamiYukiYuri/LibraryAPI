@@ -25,10 +25,10 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    // GET user by id
-    @GetMapping("/user/{id}")
-    public User getUserById(@PathVariable String id) {
-        return userService.getUserById(id);
+    // GET user by userId
+    @GetMapping("/user/{userId}")
+    public User getUserById(@PathVariable String userId) {
+        return userService.getUserById(userId);
     }
 
     // PUT update a user
@@ -38,9 +38,9 @@ public class UserController {
     }
 
     // DELETE user
-    @DeleteMapping("/user/{id}")
-    public void deleteUser(@PathVariable String id) {
-        userService.deleteUser(id);
+    @DeleteMapping("/user/{userId}")
+    public void deleteUser(@PathVariable String userId) {
+        userService.deleteUser(userId);
     }
 
 }

@@ -15,7 +15,7 @@ public class User {
     private String fullName;
     private List borrowedBooks;
     @CreatedDate
-    private Date added;
+    private Date created;
 
 
     // Tom konstruktor för att inte Postman ska balla ur
@@ -37,7 +37,7 @@ public class User {
         return borrowedBooks;
     }
 
-    public Date getAdded() {
-        return added;
+    public Date getCreated() {
+        return created;
     }
 }

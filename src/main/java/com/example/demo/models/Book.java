@@ -9,13 +9,17 @@ import java.util.Date;
 @Document(collection = "books")
 
 public class Book {
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
     @Id
     private String id;
     private String title;
     private String author;
     private String description;
     private String pageAmount;
-    private String available; // ???
+    private boolean available; // ???
     @CreatedDate
     private Date added;
 
@@ -50,7 +54,7 @@ public class Book {
         return added;
     }
 
-    public String getAvailable() {
+    public boolean getAvailable() {
         return available;
     }
 

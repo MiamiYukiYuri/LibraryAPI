@@ -25,22 +25,22 @@ public class BookController {
         return bookService.getAllBooks();
     }
 
-    // GET book by id
-    // {id} = path parameter
-    @GetMapping("/book/{id}")
-    public Book getBookById(@PathVariable String id) {
-        return bookService.getBookById(id);
+    // GET book by bookId
+    // {bookId} = path parameter
+    @GetMapping("/book/{bookId}")
+    public Book getBookById(@PathVariable String bookId) {
+        return bookService.getBookById(bookId);
     }
 
     // PUT - update book info
-    @PutMapping("/book/{id}")
+    @PutMapping("/book")
     public Book updateBook(@RequestBody Book book) {
         return bookService.updateBook(book);
     }
 
     // DELETE book
-    @DeleteMapping("/book/{id}")
-    public void deleteBook(@PathVariable String id) {
-        bookService.deleteBook(id);
+    @DeleteMapping("/book/{bookId}")
+    public void deleteBook(@PathVariable String bookId) {
+        bookService.deleteBook(bookId);
     }
 }

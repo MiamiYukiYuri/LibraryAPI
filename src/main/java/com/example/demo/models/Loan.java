@@ -1,9 +1,11 @@
 package com.example.demo.models;
 
+import org.springframework.cglib.core.Local;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
 import java.util.Date;
 
     @Document(collection = "loans")
@@ -12,13 +14,14 @@ import java.util.Date;
         @Id
         private String id;
 
-        private String bookId; // ??
+        private String bookId;
 
-        private String userId; // ??
+        private String userId;
 
         @CreatedDate
-        private Date borrowed;
-        private Date returnDate;
+        private LocalDate borrowed;
+        private LocalDate returnDate;
+
 
         // CONSTRUCTOR
         public Loan() {
@@ -37,11 +40,11 @@ import java.util.Date;
             return userId;
         }
 
-        public Date getBorrowed() {
+        public LocalDate getBorrowed() {
             return borrowed;
         }
 
-        public Date getReturnDate() {
-            return returnDate;
+        public LocalDate getReturnDate() {
+            return borrowed.plusDays(14);
         }
     }
