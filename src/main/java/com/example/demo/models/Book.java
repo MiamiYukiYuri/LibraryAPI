@@ -9,9 +9,6 @@ import java.util.Date;
 @Document(collection = "books")
 
 public class Book {
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
 
     @Id
     private String id;
@@ -19,7 +16,7 @@ public class Book {
     private String author;
     private String description;
     private String pageAmount;
-    private boolean available; // ???
+    private boolean available = true;
     @CreatedDate
     private Date added;
 
@@ -27,7 +24,6 @@ public class Book {
     // Tom konstruktor för att inte Postman ska balla ur
     public Book() {
     }
-
 
     // GETTERS
     public String getId() {
@@ -58,4 +54,8 @@ public class Book {
         return available;
     }
 
+    // SETTER
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
 }

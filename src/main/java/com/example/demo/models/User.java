@@ -12,7 +12,8 @@ import java.util.List;
 public class User {
     @Id
     private String id;
-    private String fullName;
+    private String firstName;
+    private String lastName;
     private List borrowedBooks;
     @CreatedDate
     private Date created;
@@ -22,16 +23,17 @@ public class User {
     public User() {
     }
 
-
     // GETTERS
     public String getId() {
         return id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFirstName() {
+        return firstName;
     }
-
+    public String getLastName() {
+        return lastName;
+    }
 
     public List getBorrowedBooks() {
         return borrowedBooks;

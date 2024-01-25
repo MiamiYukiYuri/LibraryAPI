@@ -20,7 +20,7 @@ public class LoanService {
     private BookRepository bookRepository;
 
     // ADD - register a new loan
-    // Skapa ett lån där vi först hämtar bok id från loan som vi sedan använder för att hämta rätt bok från bookRepository
+    // Skapa ett lån där vi först hämtar bookId från loan som vi sedan använder för att hämta rätt bok från bookRepository
     // När vi hämtat boken uppdaterar vi status på specifik bok till ej tillgänglig för utlånging
     // Vi sparar ner bokens nya tillstånd (ej tillgänglig) till databasen
     // Därefter skapas lånet
@@ -32,7 +32,7 @@ public class LoanService {
         return loanRepository.save(loan);
     }
 
-    // GET ALL loaned books
+    // GET ALL loans
     public List<Loan> getAllLoans() {
         return loanRepository.findAll();
     }
@@ -57,9 +57,9 @@ public class LoanService {
     }
 
     // GET loan by book id
-    // Lån sätts till null initialt
+    // Loan sätts till null initialt
     // loopar genom alla lån
-    // Om bokid matchar så blir det "foundLoan" som vi sedan returnerar i slutet på metoden
+    // Om bokid matchar så blir det "foundLoan" = loan  som vi sedan returnerar i slutet på metoden
     public Loan getLoanByBookId(String id) {
         Loan foundLoan = null;
         for (Loan loan : loanRepository.findAll()) {
@@ -71,15 +71,20 @@ public class LoanService {
         return foundLoan;
     }
 
-
     // PUT - update loan info, ex. return date
     public Loan updateLoan(Loan loan) {
         return loanRepository.save(loan);
     }
 
     // DELETE - end a loan
+    // Hämtar loanId för att kunna hämta bookId och ändra status till available = true
+    // Sparar bokens nya status och tar sedan bort lånet
     public void deleteLoan(String id) {
+        Loan loan = loanRepository.findById(id).get();
+        String bookId = loan.getBookId();
+        Book book = bookRepository.findById(bookId).get();
+        book.setAvailable(true);
+        bookRepository.save(book);
         loanRepository.deleteById(id);
     }
-
 }

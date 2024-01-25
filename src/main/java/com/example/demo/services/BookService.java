@@ -27,7 +27,7 @@ public class BookService {
         return bookRepository.findById(id).get();
     }
 
-    // PUT update book info
+    // PUT - update book info
     public Book updateBook(Book book) {
         return bookRepository.save(book);
     }
@@ -36,5 +36,4 @@ public class BookService {
     public void deleteBook(String id) {
         bookRepository.deleteById(id);
     }
-
 }

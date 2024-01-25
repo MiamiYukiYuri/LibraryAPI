@@ -47,8 +47,6 @@ public class LoanController {
         return loanService.getLoanByBookId(bookId);
     }
 
-
-
     // PUT - update loan info
     @PutMapping("/loan")
     public Loan updateLoan(@RequestBody Loan loan) {
