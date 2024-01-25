@@ -21,14 +21,19 @@ public class LoanService {
     private BookRepository bookRepository;
 
     // ADD - register a new loan
-    // Retrieves the book which will be lent with bookId from bookRepository
-    // Puts the books' status to available = false, i.e. not available for lending and saves the new status
+    // Retrieves the book which will be borrowed with bookId from bookRepository
+    // If the book is not available the method returns a null value
+    // If the book is available it puts the books' status to available = false, i.e. not available to borrow and saves the new status
     // Uses setters to set date for 'borrowed' and 'returnDate', ends with saving the new loan to the database
     public Loan createLoan(Loan loan) {
         String bookId = loan.getBookId();
         Book book = bookRepository.findById(bookId).get();
-        book.setAvailable(false);
-        bookRepository.save(book);
+        if (book.getAvailable() == false) {
+            return null;
+        } else {
+            book.setAvailable(false);
+            bookRepository.save(book);
+        }
         loan.setBorrowed(LocalDate.now());
         loan.setReturnDate(LocalDate.now().plusDays(14));
         return loanRepository.save(loan);

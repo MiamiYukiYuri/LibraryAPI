@@ -5,7 +5,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
-import java.util.List;
 
 @Document(collection = "users")
 
@@ -14,7 +13,6 @@ public class User {
     private String id;
     private String firstName;
     private String lastName;
-    private List borrowedBooks;
     @CreatedDate
     private Date created;
 
@@ -28,7 +26,6 @@ public class User {
     }
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
-    public List getBorrowedBooks() { return borrowedBooks; }
     public Date getCreated() { return created; }
 
     @Override
@@ -37,7 +34,6 @@ public class User {
                 "id='" + id + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", borrowedBooks=" + borrowedBooks +
                 ", created=" + created +
                 '}';
     }
