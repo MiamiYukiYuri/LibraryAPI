@@ -42,4 +42,15 @@ public class User {
     public Date getCreated() {
         return created;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", borrowedBooks=" + borrowedBooks +
+                ", created=" + created +
+                '}';
+    }
 }

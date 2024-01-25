@@ -14,6 +14,7 @@ public class BookService {
 
     // ADD book
     public Book createBook(Book book) {
+        book.setAvailable(true);
         return bookRepository.save(book);
     }
 

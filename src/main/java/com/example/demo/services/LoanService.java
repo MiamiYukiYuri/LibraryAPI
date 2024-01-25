@@ -7,6 +7,7 @@ import com.example.demo.repository.LoanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,15 +21,15 @@ public class LoanService {
     private BookRepository bookRepository;
 
     // ADD - register a new loan
-    // Skapa ett lån där vi först hämtar bookId från loan som vi sedan använder för att hämta rätt bok från bookRepository
-    // När vi hämtat boken uppdaterar vi status på specifik bok till ej tillgänglig för utlånging
-    // Vi sparar ner bokens nya tillstånd (ej tillgänglig) till databasen
-    // Därefter skapas lånet
+    // Hämtar boken som skall lånas via bookId från bookRepository för att kunna sätta availability till false (utlånad) och sparar bokens status
+    // Sätter datum för lån och återlämning och sparar lånet
     public Loan createLoan(Loan loan) {
         String bookId = loan.getBookId();
         Book book = bookRepository.findById(bookId).get();
         book.setAvailable(false);
         bookRepository.save(book);
+        loan.setBorrowed(LocalDate.now());
+        loan.setReturnDate(LocalDate.now().plusDays(14));
         return loanRepository.save(loan);
     }
 
@@ -42,10 +43,9 @@ public class LoanService {
         return loanRepository.findById(id).get();
     }
 
-    // Skapar en ny arraylist, userLoanList
-    // Letar sedan efter alla lån i loanRepository
-    // Om lånets userId matchar så lägger vi till det i vår array list
-    // Slutligen returnar vi hela vår arraylist med lån för en enskild användare
+    // Metod som listar alla lån baserat på userId
+    // Loopar igenom alla lån och lägger till de lån vars userId matchar till en ny array list
+    // Returnerar vår array list med lån för en enskild användare
     public List<Loan> getLoanByUserId(String id) {
         List<Loan> userLoanList = new ArrayList<>();
         for (Loan loan : loanRepository.findAll()) {
@@ -77,7 +77,8 @@ public class LoanService {
     }
 
     // DELETE - end a loan
-    // Hämtar loanId för att kunna hämta bookId och ändra status till available = true
+    // Hämtar rätt lån
+    // Hämtar boken som hör till lånet och ändrar available status till true
     // Sparar bokens nya status och tar sedan bort lånet
     public void deleteLoan(String id) {
         Loan loan = loanRepository.findById(id).get();
