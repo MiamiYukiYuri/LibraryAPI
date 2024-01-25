@@ -18,8 +18,7 @@ public class User {
     @CreatedDate
     private Date created;
 
-
-    // Tom konstruktor för att inte Postman ska balla ur
+    // Empty constructor
     public User() {
     }
 
@@ -27,21 +26,10 @@ public class User {
     public String getId() {
         return id;
     }
-
-    public String getFirstName() {
-        return firstName;
-    }
-    public String getLastName() {
-        return lastName;
-    }
-
-    public List getBorrowedBooks() {
-        return borrowedBooks;
-    }
-
-    public Date getCreated() {
-        return created;
-    }
+    public String getFirstName() { return firstName; }
+    public String getLastName() { return lastName; }
+    public List getBorrowedBooks() { return borrowedBooks; }
+    public Date getCreated() { return created; }
 
     @Override
     public String toString() {

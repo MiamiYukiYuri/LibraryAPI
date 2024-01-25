@@ -21,8 +21,9 @@ public class LoanService {
     private BookRepository bookRepository;
 
     // ADD - register a new loan
-    // Hämtar boken som skall lånas via bookId från bookRepository för att kunna sätta availability till false (utlånad) och sparar bokens status
-    // Sätter datum för lån och återlämning och sparar lånet
+    // Retrieves the book which will be lent with bookId from bookRepository
+    // Puts the books' status to available = false, i.e. not available for lending and saves the new status
+    // Uses setters to set date for 'borrowed' and 'returnDate', ends with saving the new loan to the database
     public Loan createLoan(Loan loan) {
         String bookId = loan.getBookId();
         Book book = bookRepository.findById(bookId).get();
@@ -38,14 +39,15 @@ public class LoanService {
         return loanRepository.findAll();
     }
 
-    // GET a specific loan by id
+    // GET loan by id
     public Loan getLoanById(String id) {
         return loanRepository.findById(id).get();
     }
 
-    // Metod som listar alla lån baserat på userId
-    // Loopar igenom alla lån och lägger till de lån vars userId matchar till en ny array list
-    // Returnerar vår array list med lån för en enskild användare
+    // GET loan by userId
+    // Lists all loans based on userId
+    // Loops through the list of loans and adds the loans witch matches the userId to a new array list, userLoanList
+    // Returns the array list of loans for a single user
     public List<Loan> getLoanByUserId(String id) {
         List<Loan> userLoanList = new ArrayList<>();
         for (Loan loan : loanRepository.findAll()) {
@@ -56,10 +58,10 @@ public class LoanService {
         return userLoanList;
     }
 
-    // GET loan by book id
-    // Loan sätts till null initialt
-    // loopar genom alla lån
-    // Om bokid matchar så blir det "foundLoan" = loan  som vi sedan returnerar i slutet på metoden
+    // GET loan by bookId
+    // Puts our variable 'foundLoan' to null initially
+    // Loops through all loans until there is a match with the bookId
+    // The variable 'foundLoan' now represent the match and is returned in the end of the method
     public Loan getLoanByBookId(String id) {
         Loan foundLoan = null;
         for (Loan loan : loanRepository.findAll()) {
@@ -71,15 +73,15 @@ public class LoanService {
         return foundLoan;
     }
 
-    // PUT - update loan info, ex. return date
+    // PUT - update loan information, ex. return date
     public Loan updateLoan(Loan loan) {
         return loanRepository.save(loan);
     }
 
     // DELETE - end a loan
-    // Hämtar rätt lån
-    // Hämtar boken som hör till lånet och ändrar available status till true
-    // Sparar bokens nya status och tar sedan bort lånet
+    // Finds the loan by loanId and thereafter the book that is attached to the loanId, with bookId
+    // Sets the status of the book to available = true, i.e. available for lending
+    // Saves the new status and then deletes the loan by loanId
     public void deleteLoan(String id) {
         Loan loan = loanRepository.findById(id).get();
         String bookId = loan.getBookId();

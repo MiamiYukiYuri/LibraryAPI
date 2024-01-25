@@ -2,7 +2,6 @@ package com.example.demo.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.time.LocalDate;
 
 @Document(collection = "loans")
@@ -15,7 +14,7 @@ public class Loan {
     private LocalDate borrowed;
     private LocalDate returnDate;
 
-    // CONSTRUCTOR
+    // Empty constructor
     public Loan() {
     }
 
@@ -36,11 +35,9 @@ public class Loan {
         return borrowed;
     }
 
-    public LocalDate getReturnDate() {
-            return returnDate;
-        }
+    public LocalDate getReturnDate() { return returnDate; }
 
-    // SETTER - for updating the return date
+    // SETTERS
     public void setReturnDate(LocalDate returnDate) {
       this.returnDate = returnDate;
     }

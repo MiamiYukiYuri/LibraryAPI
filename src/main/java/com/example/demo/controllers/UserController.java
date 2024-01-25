@@ -31,7 +31,7 @@ public class UserController {
         return userService.getUserById(userId);
     }
 
-    // PUT update a user
+    // PUT - update user information
     @PutMapping("/user")
     public User updateUser(@RequestBody User user) {
         return userService.updateUser(user);

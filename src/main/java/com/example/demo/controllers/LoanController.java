@@ -13,7 +13,7 @@ public class LoanController {
     @Autowired
     LoanService loanService;
 
-    // POST - ADD loan  http://localhost:8080/api/book
+    // POST - create a new loan  http://localhost:8080/api/book
     @PostMapping("/loan")
     public Loan createLoan(@RequestBody Loan loan) {
         return loanService.createLoan(loan);
@@ -26,28 +26,23 @@ public class LoanController {
     }
 
     // GET loan by id
-    // {id} = path parameter
     @GetMapping("/loan/{loanId}")
     public Loan getLoanById(@PathVariable String loanId) {
-        return loanService.getLoanById(loanId);
-    }
+        return loanService.getLoanById(loanId); }
 
-
-    // GET loan by user id
-    // Hämtar listan med lån för specifikt user id
+    // GET loan by userId
     @GetMapping("/loan/user/{userId}")
     public List<Loan> getLoanByUserId(@PathVariable String userId) {
         return loanService.getLoanByUserId(userId);
     }
 
-
-    // GET loan by book bookId
+    // GET loan by bookId
     @GetMapping("loan/book/{bookId}")
     public Loan getLoanByBookId(@PathVariable String bookId) {
         return loanService.getLoanByBookId(bookId);
     }
 
-    // PUT - update loan info
+    // PUT - update loan information
     @PutMapping("/loan")
     public Loan updateLoan(@RequestBody Loan loan) {
         return loanService.updateLoan(loan);

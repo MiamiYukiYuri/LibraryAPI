@@ -9,7 +9,6 @@ import java.util.Date;
 @Document(collection = "books")
 
 public class Book {
-
     @Id
     private String id;
     private String title;
@@ -20,8 +19,7 @@ public class Book {
     @CreatedDate
     private Date added;
 
-
-    // Tom konstruktor för att inte Postman ska balla ur
+    // Empty constructor
     public Book() {
     }
 

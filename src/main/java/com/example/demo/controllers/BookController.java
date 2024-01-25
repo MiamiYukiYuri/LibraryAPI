@@ -13,11 +13,9 @@ public class BookController {
     @Autowired
     BookService bookService;
 
-    // POST - ADD book  http://localhost:8080/api/book
+    // POST - add a new book to the library  http://localhost:8080/api/book
     @PostMapping("/book")
-    public Book createBook(@RequestBody Book book) {
-        return bookService.createBook(book);
-    }
+    public Book createBook(@RequestBody Book book) { return bookService.createBook(book); }
 
     // GET ALL books
     @GetMapping("/book")
@@ -26,13 +24,12 @@ public class BookController {
     }
 
     // GET book by bookId
-    // {bookId} = path parameter
     @GetMapping("/book/{bookId}")
     public Book getBookById(@PathVariable String bookId) {
         return bookService.getBookById(bookId);
     }
 
-    // PUT - update book info
+    // PUT - update book information
     @PutMapping("/book")
     public Book updateBook(@RequestBody Book book) {
         return bookService.updateBook(book);
