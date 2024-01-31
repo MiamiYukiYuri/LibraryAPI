@@ -21,9 +21,8 @@ public class LoanService {
     private BookRepository bookRepository;
 
     // ADD - register a new loan
-    // Retrieves the book which will be borrowed with bookId from bookRepository
-    // If the book is not available the method returns a null value
-    // If the book is available it puts the books' status to available = false, i.e. not available to borrow and saves the new status
+    // Retrieves the book which will be borrowed with bookId from bookRepository. If the book is not available the method returns null
+    // If the book is available it puts the books' status to available = false, i.e. not available to borrow, and saves the new status
     // Uses setters to set date for 'borrowed' and 'returnDate', ends with saving the new loan to the database
     public Loan createLoan(Loan loan) {
         String bookId = loan.getBookId();
@@ -50,8 +49,8 @@ public class LoanService {
     }
 
     // GET loan by userId
-    // Lists all loans based on userId
-    // Loops through the list of loans and adds the loans witch matches the userId to a new array list, userLoanList
+    // Lists all loans based on a specific userId
+    // Loops through the list of loans and adds the loans which matches the userId to a new array list; userLoanList
     // Returns the array list of loans for a single user
     public List<Loan> getLoanByUserId(String id) {
         List<Loan> userLoanList = new ArrayList<>();
@@ -64,7 +63,7 @@ public class LoanService {
     }
 
     // GET loan by bookId
-    // Puts our variable 'foundLoan' to null initially
+    // Puts the variable 'foundLoan' to null initially
     // Loops through all loans until there is a match with the bookId
     // The variable 'foundLoan' now represent the match and is returned in the end of the method
     public Loan getLoanByBookId(String id) {

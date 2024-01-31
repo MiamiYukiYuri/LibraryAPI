@@ -15,7 +15,9 @@ public class BookController {
 
     // POST - add a new book to the library  http://localhost:8080/api/book
     @PostMapping("/book")
-    public Book createBook(@RequestBody Book book) { return bookService.createBook(book); }
+    public Book createBook(@RequestBody Book book) {
+        return bookService.createBook(book);
+    }
 
     // GET ALL books
     @GetMapping("/book")

@@ -13,7 +13,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    //POST create a new user  http://localhost:8080/api/user
+    //POST - create a new user  http://localhost:8080/api/user
     @PostMapping("/user")
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
