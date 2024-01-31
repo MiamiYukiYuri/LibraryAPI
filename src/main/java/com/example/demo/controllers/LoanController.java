@@ -30,17 +30,6 @@ public class LoanController {
     public Loan getLoanById(@PathVariable String loanId) {
         return loanService.getLoanById(loanId); }
 
-    // GET loan by userId
-    @GetMapping("/loan/user/{userId}")
-    public List<Loan> getLoanByUserId(@PathVariable String userId) {
-        return loanService.getLoanByUserId(userId);
-    }
-
-    // GET loan by bookId
-    @GetMapping("loan/book/{bookId}")
-    public Loan getLoanByBookId(@PathVariable String bookId) {
-        return loanService.getLoanByBookId(bookId);
-    }
 
     // PUT - update loan information
     @PutMapping("/loan")

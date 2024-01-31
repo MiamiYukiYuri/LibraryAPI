@@ -33,7 +33,8 @@ public class BookService {
     }
 
     // DELETE book
-    public void deleteBook(String id) {
+    public String deleteBook(String id) {
         bookRepository.deleteById(id);
+        return "Book deleted";
     }
 }
