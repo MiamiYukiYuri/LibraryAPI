@@ -1,8 +1,11 @@
 package com.example.demo.controllers;
 
+import com.example.demo.exception.EntityNotFoundException;
 import com.example.demo.services.LoanService;
 import com.example.demo.models.Loan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -13,10 +16,15 @@ public class LoanController {
     @Autowired
     LoanService loanService;
 
-    // POST - create a new loan  http://localhost:8080/api/book
+    // POST - create a new loan  http://localhost:8080/api/loan
     @PostMapping("/loan")
-    public Loan createLoan(@RequestBody Loan loan) {
-        return loanService.createLoan(loan);
+    public ResponseEntity<?> createLoan(@RequestBody Loan loan) {
+        try {
+            Loan createdLoan = loanService.createLoan(loan);
+            return ResponseEntity.ok(createdLoan);
+        } catch (EntityNotFoundException entityNotFoundException) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(entityNotFoundException.getMessage());
+        }
     }
 
     // GET ALL loans
@@ -39,7 +47,7 @@ public class LoanController {
 
     // DELETE loan
     @DeleteMapping("/loan/{loanId}")
-    public void deleteLoan(@PathVariable String loanId) {
-        loanService.deleteLoan(loanId);
+    public String deleteLoan(@PathVariable String loanId) {
+        return loanService.deleteLoan(loanId);
     }
 }

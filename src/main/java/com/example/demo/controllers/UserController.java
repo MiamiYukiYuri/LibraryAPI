@@ -1,6 +1,8 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.Loan;
 import com.example.demo.models.User;
+import com.example.demo.services.LoanService;
 import com.example.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,8 @@ public class UserController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    LoanService loanService;
 
     //POST - create a new user  http://localhost:8080/api/user
     @PostMapping("/user")
@@ -39,8 +43,8 @@ public class UserController {
 
     // DELETE user
     @DeleteMapping("/user/{userId}")
-    public void deleteUser(@PathVariable String userId) {
-        userService.deleteUser(userId);
+    public String deleteUser(@PathVariable String userId) {
+        return userService.deleteUser(userId);
     }
 
 }
