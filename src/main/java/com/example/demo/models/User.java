@@ -14,23 +14,23 @@ public class User {
     private String id;
     private String firstName;
     private String lastName;
-
-    public List<Loan> getBorrowedBooks() {
-        return borrowedBooks;
-    }
-
-    public void setBorrowedBooks(List<Loan> borrowedBooks) {
-        this.borrowedBooks = borrowedBooks;
-    }
-
     private List<Loan> borrowedBooks;
-
     @CreatedDate
     private Date created;
+
 
     // Empty constructor
     public User() {
     }
+
+    // SETTER AND GETTER for borrowedBooks
+    public List<Loan> getBorrowedBooks() {
+        return borrowedBooks;
+    }
+    public void setBorrowedBooks(List<Loan> borrowedBooks) {
+        this.borrowedBooks = borrowedBooks;
+    }
+
 
     // GETTERS
     public String getId() {

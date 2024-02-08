@@ -23,9 +23,12 @@ public class LoanService {
     private BookRepository bookRepository;
 
     // ADD - register a new loan
-    // Retrieves the book which will be borrowed with bookId from bookRepository. If the book is not available the method returns null since I didn't know how to get a displyed message "book not available".
-    // If the book is available it puts the books' status to available = false, i.e. not available to borrow, and saves the new status
-    // Uses setters to set date for 'borrowed' and 'returnDate', ends with saving the new loan to the database
+    // Retrieves the book which will be borrowed with bookId from bookRepository
+    // If/else depending on the books' status;
+    // if the book is not available(=false), i.e. already lent out, the method throws custom exception and displays a message to user, and ends method
+    // if the book is available(=true) it then sets the books' status to available = false, i.e. no longer available to borrow, and saves the new status
+    // Uses setters to set date for 'borrowed' and 'returnDate', where 'returnDate' has an addition of 14 days from the current date
+    // Ends with saving the loan to database
         public Loan createLoan(Loan loan) {
         String bookId = loan.getBookId();
         Optional<Book> book = bookRepository.findById(bookId);
@@ -42,42 +45,6 @@ public class LoanService {
         loan.setReturnDate(LocalDate.now().plusDays(14));
         return loanRepository.save(loan);
     }
-
-
-
-    /*
-    // map() = lambda = en funktion/metod. Tar emot ett värde och skickar tillbaka ett värde of my choice
-    // inparametern til map-metoden är ett functional interface (= en metod att agera på).
-    public Optional<Loan> createLoan(Loan loan) {
-        String bookId = loan.getBookId();
-        Optional <Loan> returningLoan = bookRepository.findById(bookId).map(
-                exsitingBook -> {
-            if (exsitingBook.getAvailable()) {
-                exsitingBook.setAvailable(false);
-                bookRepository.save(exsitingBook);
-                loan.setBorrowed(LocalDate.now());
-                loan.setReturnDate(LocalDate.now().plusDays(14));
-                return loanRepository.save(loan);
-            }
-            else {
-                return null;
-            }
-        });
-
-
-
-
-
-        if (book.getAvailable() == true) {
-            book.setAvailable(false);
-            bookRepository.save(book);
-            loan.setBorrowed(LocalDate.now());
-            loan.setReturnDate(LocalDate.now().plusDays(14));
-        } return loanRepository.save(loan);
-        .orElseThrow(() -> new EntityNotFoundException("This book is not available for lending at the moment".));
-    }
-*/
-
 
     // GET ALL loans
     public List<Loan> getAllLoans() {

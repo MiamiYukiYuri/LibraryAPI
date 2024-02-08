@@ -1,6 +1,5 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.Loan;
 import com.example.demo.models.User;
 import com.example.demo.services.LoanService;
 import com.example.demo.services.UserService;

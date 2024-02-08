@@ -17,6 +17,7 @@ public class LoanController {
     LoanService loanService;
 
     // POST - create a new loan  http://localhost:8080/api/loan
+    // Trying out Response Entity
     @PostMapping("/loan")
     public ResponseEntity<?> createLoan(@RequestBody Loan loan) {
         try {
@@ -37,7 +38,6 @@ public class LoanController {
     @GetMapping("/loan/{loanId}")
     public Loan getLoanById(@PathVariable String loanId) {
         return loanService.getLoanById(loanId); }
-
 
     // PUT - update loan information
     @PutMapping("/loan")
