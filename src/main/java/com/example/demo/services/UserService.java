@@ -39,6 +39,24 @@ public class UserService {
         return user;
     }
 
+    // PUT - update user information, possibility to ex. change loan return date or removing a loan, or all loans, entirely
+    public User updateUser(String id, User updatedUser) {
+        return userRepository.findById(id)
+                .map(existingUser -> {
+                    if (updatedUser.getFirstName() != null) {
+                        existingUser.setFirstName(updatedUser.getFirstName());
+                    }
+                    if (updatedUser.getLastName() != null) {
+                        existingUser.setLastName(updatedUser.getLastName());
+                    }
+                    if (updatedUser.getLoans() != null) {
+                        existingUser.setLoans(updatedUser.getLoans());
+                    }
+                    return userRepository.save(existingUser);
+                })
+                .orElseThrow(() -> new EntityNotFoundException("User with id: " + id + " was not found."));
+    }
+
     // DELETE user
     public String deleteUser(String id) {
         userRepository.deleteById(id);
@@ -46,7 +64,8 @@ public class UserService {
     }
 
 
-    // LOAN DBRef - add a loan to a user
+    // Add a loan to a user using DBRef
+    // Sets book to status "unavailable"
     public User addLoanToUser(String userId, Loan loan) {
     String bookId = loan.getBookId();
         Optional<Book> book = bookRepository.findById(bookId);
@@ -66,7 +85,8 @@ public class UserService {
     }
 
 
-    // LOAN DBRef - remove a loan from a user
+    // Remove specific loan from user
+    // Sets book to status "available"
     public User removeLoanFromUser(Loan loan) {
         Optional<User> user = userRepository.findById(loan.getUserId());
         if (user.isPresent()) {
@@ -87,23 +107,5 @@ public class UserService {
             throw new RuntimeException("User not found.");
         }
         return null;
-    }
-
-    // PUT - update user information
-    public User updateUser(String id, User updatedUser) {
-        return userRepository.findById(id)
-                .map(existingUser -> {
-                    if (updatedUser.getFirstName() != null) {
-                        existingUser.setFirstName(updatedUser.getFirstName());
-                    }
-                    if (updatedUser.getLastName() != null) {
-                        existingUser.setLastName(updatedUser.getLastName());
-                    }
-                    if (updatedUser.getLoans() != null) {
-                        existingUser.setLoans(updatedUser.getLoans());
-                    }
-                    return userRepository.save(existingUser);
-                })
-                .orElseThrow(() -> new EntityNotFoundException("User with id: " + id + " was not found."));
     }
 }

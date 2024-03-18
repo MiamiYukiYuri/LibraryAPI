@@ -50,7 +50,6 @@ public class UserController {
     }
 
 
-
     // Add a loan to a user with DBRef
     @PostMapping("/{userId}/loans/add")
     public ResponseEntity<User> addLoanToUser (@PathVariable String userId, @RequestBody Loan loan) {
@@ -62,7 +61,7 @@ public class UserController {
         }
     }
 
-    // Remove a loan from a user
+    // Remove a specific loan from a user
     @PutMapping("/user/loans/remove")
     public ResponseEntity<User> removeLoanFromUser (@RequestBody Loan loan) {
         try {
