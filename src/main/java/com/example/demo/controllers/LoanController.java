@@ -1,3 +1,4 @@
+/*
 package com.example.demo.controllers;
 
 import com.example.demo.exception.EntityNotFoundException;
@@ -51,3 +52,5 @@ public class LoanController {
         return loanService.deleteLoan(loanId);
     }
 }
+
+ */

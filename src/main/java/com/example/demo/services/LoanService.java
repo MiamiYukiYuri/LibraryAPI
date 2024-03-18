@@ -22,6 +22,7 @@ public class LoanService {
     @Autowired
     private BookRepository bookRepository;
 
+
     // ADD - register a new loan
     // Retrieves the book which will be borrowed with bookId from bookRepository
     // If/else depending on the books' status;
@@ -45,6 +46,13 @@ public class LoanService {
         loan.setReturnDate(LocalDate.now().plusDays(14));
         return loanRepository.save(loan);
     }
+
+    // Add loan to user
+    public Loan saveLoan (Loan loan) {
+        return loanRepository.save(loan);
+    }
+
+
 
     // GET ALL loans
     public List<Loan> getAllLoans() {

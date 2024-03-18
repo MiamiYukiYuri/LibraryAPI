@@ -2,8 +2,10 @@ package com.example.demo.models;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,23 +16,48 @@ public class User {
     private String id;
     private String firstName;
     private String lastName;
-    private List<Loan> borrowedBooks;
     @CreatedDate
     private Date created;
 
+
+    // Objekt id-referens
+    @DBRef
+    private List<Loan> loans = new ArrayList<>();
 
     // Empty constructor
     public User() {
     }
 
-    // SETTER AND GETTER for borrowedBooks
-    public List<Loan> getBorrowedBooks() {
-        return borrowedBooks;
-    }
-    public void setBorrowedBooks(List<Loan> borrowedBooks) {
-        this.borrowedBooks = borrowedBooks;
+    // metod för att lägga till ett lån
+    public void addLoanToUser(Loan loan) {
+        this.loans.add(loan);
     }
 
+    // metod för att ta bort ett lån
+    public void deleteLoanFromUser(Loan loan) {
+        this.loans.remove(loan);
+    }
+
+
+
+    // Getter and setter for loan list
+    public List<Loan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(List<Loan> loans) {
+        this.loans = loans;
+    }
+
+    // Setters for firstName and lastName
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     // GETTERS
     public String getId() {

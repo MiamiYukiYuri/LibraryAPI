@@ -11,8 +11,8 @@ public class Loan {
     private String id;
     private String bookId;
     private String userId;
-    private LocalDate borrowed;
-    private LocalDate returnDate;
+    private LocalDate borrowed = LocalDate.now();
+    private LocalDate returnDate = LocalDate.now().plusDays(14);
 
     // Empty constructor
     public Loan() {
@@ -40,7 +40,7 @@ public class Loan {
 
     // SETTERS
     public void setReturnDate(LocalDate returnDate) {
-      this.returnDate = returnDate;
+        this.returnDate = returnDate;
     }
 
     public void setBorrowed(LocalDate borrowed) {

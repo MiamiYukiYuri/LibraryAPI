@@ -13,7 +13,7 @@ public class BookController {
     @Autowired
     BookService bookService;
 
-    // POST - add a new book to the library  http://localhost:8080/api/book
+    // POST - add a new book to the library
     @PostMapping("/book")
     public Book createBook(@RequestBody Book book) {
         return bookService.createBook(book);
