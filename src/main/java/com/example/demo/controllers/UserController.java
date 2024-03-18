@@ -26,7 +26,7 @@ public class UserController {
     }
 
     // GET ALL users
-    @GetMapping("/user")
+    @GetMapping("/user/all")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
@@ -40,7 +40,7 @@ public class UserController {
     // PUT - update user information
     @PutMapping("/user")
     public User updateUser(@RequestBody User user) {
-        return userService.updateUser(user);
+        return userService.updateUser(user.getId(), user);
     }
 
     // DELETE user
@@ -51,8 +51,8 @@ public class UserController {
 
 
 
-    // lägga till ett lån till en användare med objekt id-referens
-    @PostMapping("/{userId}/loans")
+    // Add a loan to a user with DBRef
+    @PostMapping("/{userId}/loans/add")
     public ResponseEntity<User> addLoanToUser (@PathVariable String userId, @RequestBody Loan loan) {
         try {
     User updatedUser = userService.addLoanToUser(userId, loan);
@@ -62,11 +62,11 @@ public class UserController {
         }
     }
 
-    // ta bort ett lån från en användare
-    @DeleteMapping("/{userId}/loans")
-    public ResponseEntity<User> removeLoanFromUser (@PathVariable String userId, @RequestBody Loan loan) {
+    // Remove a loan from a user
+    @PutMapping("/user/loans/remove")
+    public ResponseEntity<User> removeLoanFromUser (@RequestBody Loan loan) {
         try {
-            User updateUser = userService.removeLoanFromUser(userId, loan);
+            User updateUser = userService.removeLoanFromUser(loan);
             return ResponseEntity.ok(updateUser);
         } catch (EntityNotFoundException entityNotFoundException) {
             return ResponseEntity.notFound().build();

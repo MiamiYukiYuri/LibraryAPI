@@ -33,12 +33,6 @@ public class User {
         this.loans.add(loan);
     }
 
-    // metod för att ta bort ett lån
-    public void deleteLoanFromUser(Loan loan) {
-        this.loans.remove(loan);
-    }
-
-
 
     // Getter and setter for loan list
     public List<Loan> getLoans() {

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -32,8 +33,20 @@ public class UserService {
         return users;
     }
 
+    // GET specific user by id
+    public User getUserById(String id) {
+        User user = userRepository.findById(id).get();
+        return user;
+    }
 
-    // DB REF - spara ett lån till en användare
+    // DELETE user
+    public String deleteUser(String id) {
+        userRepository.deleteById(id);
+        return "User deleted";
+    }
+
+
+    // LOAN DBRef - add a loan to a user
     public User addLoanToUser(String userId, Loan loan) {
     String bookId = loan.getBookId();
         Optional<Book> book = bookRepository.findById(bookId);
@@ -53,27 +66,30 @@ public class UserService {
     }
 
 
-    // FB REF - ta bort ett lån från en användare
-    public User removeLoanFromUser(String userId, Loan loan) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        user.getLoans().remove(loan);
-        return userRepository.save(user);
+    // LOAN DBRef - remove a loan from a user
+    public User removeLoanFromUser(Loan loan) {
+        Optional<User> user = userRepository.findById(loan.getUserId());
+        if (user.isPresent()) {
+            User foundUser = user.get();
+            Optional<Loan> foundLoan = foundUser.getLoans().stream().filter(loan1 -> Objects.equals(loan1.getId(), loan.getId())).findFirst();
+        if (foundLoan.isPresent()) {
+            String bookId = loan.getBookId();
+            Optional<Book> book = bookRepository.findById(bookId);
+            if (book.isPresent()) {
+                Book foundBook = book.get();
+                foundBook.setAvailable(true);
+                bookRepository.save(foundBook);
+            }
+            foundUser.getLoans().remove(foundLoan.get());
+            return updateUser(foundUser.getId(), foundUser);
+        }
+        } else {
+            throw new RuntimeException("User not found.");
+        }
+        return null;
     }
 
-
-    // GET specific user by id
-    public User getUserById(String id) {
-        User user = userRepository.findById(id).get();
-        return user;
-    }
-
-
-    // PUT - update user info
-    public User updateUser(User user) {
-        return userRepository.save(user);
-    }
-
-    // PUT
+    // PUT - update user information
     public User updateUser(String id, User updatedUser) {
         return userRepository.findById(id)
                 .map(existingUser -> {
@@ -89,11 +105,5 @@ public class UserService {
                     return userRepository.save(existingUser);
                 })
                 .orElseThrow(() -> new EntityNotFoundException("User with id: " + id + " was not found."));
-    }
-
-    // DELETE user
-    public String deleteUser(String id) {
-        userRepository.deleteById(id);
-        return "User deleted";
     }
 }
